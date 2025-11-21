@@ -23,3 +23,9 @@ dracut --force --no-hostonly --reproducible --zstd --verbose \
   --kver "$KERNEL_VERSION" "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
 
 apt list --installed > /usr/share/snow/snowfield.packages.txt
+
+# Ensure first boot works
+rm -rf /etc/machine-id
+
+# update os-release info
+echo 'IMAGE_ID="Snowfield"' >> /usr/lib/os-release
