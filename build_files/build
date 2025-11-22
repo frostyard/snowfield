@@ -24,8 +24,11 @@ dracut --force --no-hostonly --reproducible --zstd --verbose \
 
 apt list --installed > /usr/share/snow/snowfield.packages.txt
 
+# Update os-release info
+echo 'IMAGE_ID="Snowfield"' >> /usr/lib/os-release
+
+# Update build information in os-release
+sed -i "s/^BUILD_ID=.*/BUILD_ID=\"$BUILD_ID\"/" /usr/lib/os-release
+
 # Ensure first boot works
 rm -rf /etc/machine-id
-
-# update os-release info
-echo 'IMAGE_ID="Snowfield"' >> /usr/lib/os-release
