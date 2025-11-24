@@ -42,14 +42,17 @@ jobs:
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
           echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
-          # Grab commit hash
-          echo "SHORT_SHA=${GITHUB_SHA::7}" >> ${GITHUB_ENV}
 
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           submodules: recursive
+
+      - name: Build hash
+        run: |
+          # Grab commit hash
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> ${GITHUB_ENV}
 
       # Free up space on the builders
       #- name: Maximize build space
